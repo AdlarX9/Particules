@@ -3,7 +3,6 @@ const amplitudeVitesse = 0.5; // +/- la vitesse initiale des particules
 const density = 200 * (window.innerHeight * window.innerWidth / 1000 ** 2); // nombre de particules affichées, exprimé par une densité
 const rayon = 50; // rayon d'action des particules
 const perte = 20; // perte d'energie en % lorsque les particules touchent les bords de l'écran
-const V = 60;
 
 const diametreParticle = 5; // Taille des particules
 
