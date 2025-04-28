@@ -13,8 +13,8 @@ body {
 }
 
 .particle {
-    width: var(--diametre);
-    height: var(--diametre);
+    width: var(--diameter);
+    height: var(--diameter);
     background-color: black;
     position: absolute;
     transform: translate(-50%, -50%);

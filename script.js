@@ -1,21 +1,20 @@
-const repulsion = 0.5; // force de répulsion des particules
-const amplitudeVitesse = 0.5; // +/- la vitesse initiale des particules
-const density = 200 * (window.innerHeight * window.innerWidth / 1000 ** 2); // nombre de particules affichées, exprimé par une densité
-const rayon = 50; // rayon d'action des particules
-const perte = 20; // perte d'energie en % lorsque les particules touchent les bords de l'écran
+const repulsion = 0.5; // repulsion force between particles
+const speedAmplitude = 0.5; // +/- initial speed of particles
+const density = 200 * (window.innerHeight * window.innerWidth / 1000 ** 2); // number of displayed particles, expressed as a density
+const interactionRadius = 50; // interaction radius between particles
+const energyLoss = 20; // energy loss in % when particles hit the edges of the screen
 
-const diametreParticle = 5; // Taille des particules
+const particleDiameter = 5; // size of the particles
 
 const particles = [];
-
 
 function initializeParticles() {
 	for (let i = 0; i < density; i++) {
 		const particle = {
-			x: Math.random() * (document.querySelector('.simulation').getBoundingClientRect().width - diametreParticle),
-			y: Math.random() * (document.querySelector('.simulation').getBoundingClientRect().height - diametreParticle),
-			vx: (Math.random() - 0.5) * amplitudeVitesse,
-			vy: (Math.random() - 0.5) * amplitudeVitesse,
+			x: Math.random() * (document.querySelector('.simulation').getBoundingClientRect().width - particleDiameter),
+			y: Math.random() * (document.querySelector('.simulation').getBoundingClientRect().height - particleDiameter),
+			vx: (Math.random() - 0.5) * speedAmplitude,
+			vy: (Math.random() - 0.5) * speedAmplitude,
 			size: 1
 		};
 		particles.push(particle);
@@ -29,8 +28,8 @@ function updateParticles() {
 			const p2 = particles[j];
 			const dx = p2.x - p1.x;
 			const dy = p2.y - p1.y;
-			const distance = Math.sqrt(dx * dx + dy * dy) - diametreParticle * p1.size / 2 - diametreParticle * p2.size / 2;
-			if (distance <= rayon + diametreParticle * p1.size / 2 - diametreParticle * p2.size / 2) {
+			const distance = Math.sqrt(dx * dx + dy * dy) - particleDiameter * p1.size / 2 - particleDiameter * p2.size / 2;
+			if (distance <= interactionRadius + particleDiameter * p1.size / 2 - particleDiameter * p2.size / 2) {
 				const angle = Math.atan2(dy, dx);
 				const force = repulsion / distance;
 				p1.vx -= force * Math.cos(angle);
@@ -46,11 +45,11 @@ function updateParticles() {
 		p.x += p.vx / p.size;
 		p.y += p.vy / p.size;
 
-		if (p.x <= 0 || p.x >= document.querySelector('.simulation').getBoundingClientRect().width - diametreParticle * p.size) {
-			p.vx *= -1 + perte / 100;
+		if (p.x <= 0 || p.x >= document.querySelector('.simulation').getBoundingClientRect().width - particleDiameter * p.size) {
+			p.vx *= -1 + energyLoss / 100;
 		}
-		if (p.y <= 0 || p.y >= document.querySelector('.simulation').getBoundingClientRect().height - diametreParticle * p.size) {
-			p.vy *= -1 + perte / 100;
+		if (p.y <= 0 || p.y >= document.querySelector('.simulation').getBoundingClientRect().height - particleDiameter * p.size) {
+			p.vy *= -1 + energyLoss / 100;
 		}
 	}
 }
@@ -64,7 +63,7 @@ function renderParticles() {
 		} else {
 			particle = document.createElement('div');
 			particle.classList.add('particle');
-			particle.style.setProperty('--diametre', diametreParticle * particles[i].size + 'px');
+			particle.style.setProperty('--diameter', particleDiameter * particles[i].size + 'px');
 			document.querySelector('.simulation').appendChild(particle);
 		}
 		const p = particles[i];
@@ -72,10 +71,11 @@ function renderParticles() {
 	}
 }
 
-initializeParticles(); // Créer les particules au début de la scène
+initializeParticles(); // Create particles at the start of the scene
+
 function animate() {
-	updateParticles(); // Calcule la position des particules à chaque image
-	renderParticles(); // Affiche les particules à l'écran
+	updateParticles(); // Update particle positions each frame
+	renderParticles(); // Render particles on the screen
 	requestAnimationFrame(animate);
 };
 

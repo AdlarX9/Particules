@@ -1,12 +1,12 @@
-# Particules
+# Particles
 
-Voici une simulation de particules simple à comprendre. \
-Le CSS est modifiable à souhait, il n'a pas d'importance sur le fonctionnement de la simulation. \
-Vous pouvez modifier, dans le fichier Javascript, les variables commentées afin d'en constater les effets. \
-Certains comportements des particules pourraient même se rapprocher de phénomènes physiques comme la dilatation d'un gaz et son refroidissement.
+This project features a simple and intuitive particle simulation. \
+The CSS is fully customizable and does not impact the simulation's behavior. \
+You are encouraged to experiment by adjusting the commented variables in the JavaScript file to observe their effects. \
+Some behaviors may even resemble real physical phenomena, such as gas expansion and cooling.
 
-Pour le voir de vos propres yeux, rendez-vous sur [`https://particules.pifpafdeluxe.fr/`](https://particules.pifpafdeluxe.fr/).
+You can view the simulation live at [`https://particules.pifpafdeluxe.fr/`](https://particules.pifpafdeluxe.fr/).
 
-Sinon, un rapide aperçu :
+Here’s a quick preview:
 
 ![example](examples/example.gif)
